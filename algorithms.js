@@ -20,9 +20,20 @@
 // Write a recursive method called countVowels that returns the number of vowels in a given String
 // countVowels('abcedfg') ->2
 
-var countVowels = function(str){
-
+var countVowels = function(str) {
+  var choices = ['a', 'e', 'i', 'o', 'u'];
+  if (str.length === 0) {
+    return 0;
+  } else {
+    var vowelBool = 0;
+    if (choices.indexOf(str[0]) !== -1) {
+      vowelBool = 1;
+    }
+    return vowelBool + countVowels(str.slice(1));
+  }
 };
+
+// console.log(countVowels('abcdefgi'));
 
 ///////////////////////////////////////////////////////////////////////
 ///////////////////////////////////////////////////////////////////////
@@ -34,10 +45,17 @@ var countVowels = function(str){
 // sumDigits(49) → 13
 // sumDigits(12) → 3
 
-var recursiveSum = function(n){
-
+var recursiveSum = function(n) {
+  if (n < 10) {
+    return n;
+  } else {
+    var lastDigit = n % 10;
+    var remainingDigits = Math.floor(n / 10);
+    return lastDigit + recursiveSum(remainingDigits);
+  }
 };
 
+// console.log(recursiveSum(12));
 ///////////////////////////////////////////////////////////////////////
 ///////////////////////////////////////////////////////////////////////
 ///////////////////////////////////////////////////////////////////////
@@ -47,10 +65,17 @@ var recursiveSum = function(n){
 // PowerOfTwo(8) -> true
 // PowerOfTwo(9) -> false
 
-var isPowerOfTwo = function(n){
-
+var isPowerOfTwo = function(n) {
+  if (n === 1) {
+    return true;
+  } else if (n % 2 !== 0 || n < 1) {
+    return false;
+  } else {
+    return isPowerOfTwo(n / 2);
+  }
 };
 
+console.log(isPowerOfTwo(9));
 ///////////////////////////////////////////////////////////////////////
 ///////////////////////////////////////////////////////////////////////
 ///////////////////////////////////////////////////////////////////////
@@ -64,9 +89,24 @@ var isPowerOfTwo = function(n){
 // (For example, if the initial investment is 1000 and the interest rate is 10 percent,
 // then after one year the investment will be worth 1100, after two years 1210, after three years 1331, etc.)
 
-var invest = function(amount){
+// var invest = function(amount, rate, years) {
+//   if (years === 0) {
+//     return amount;
+//   } else {
+//     return (1 + (rate / 100)) * invest(amount, rate, years - 1);
+//   }
+// };
 
+var invest = function(amount, rate, years) {
+  if (years === 0) {
+    return amount;
+  } else {
+    var accrual = amount * (rate / 100);
+    return invest(amount + accrual, rate, years - 1);
+  }
 };
+
+// console.log(invest(1000, 10, 3));
 
 ///////////////////////////////////////////////////////////////////////
 ///////////////////////////////////////////////////////////////////////
@@ -81,7 +121,7 @@ var invest = function(amount){
 // ex:
 //    printRangeUpDown(4, 10);
 //    console.logs: 4,5,6,7,8,9,10,9,8,7,6,5,4
-var printRangeUpDown = function(min, max){
+var printRangeUpDown = function(min, max) {
 
 };
 
@@ -96,7 +136,7 @@ var printRangeUpDown = function(min, max){
 // remember, binary tree's are different from binary search trees!
 // you'll need to create a binary tree constructor!
 
-var binaryTreeSum = function(tree){
+var binaryTreeSum = function(tree) { 
 
 };
 
@@ -119,6 +159,6 @@ var binaryTreeSum = function(tree){
 //                    8
 
 // you'll need to create a binary search tree constructor!
-var arrayToBinarySearchTree = function(array){
+var arrayToBinarySearchTree = function(array) {
 
 };
